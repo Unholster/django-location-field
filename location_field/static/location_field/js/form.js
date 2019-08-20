@@ -409,7 +409,11 @@ var SequentialLoader = function() {
                     onchangeTimer,
                     onchange = function() {
                         var values = basedFields.map(function() {
-                            var value = $(this).val();
+                            if ($(this).is("select")) {
+                                var value = $(this).find('option:selected').text()
+                            } else {
+                                var value = $(this).val();
+                            }
                             return value === '' ? null : value;
                         });
                         if (suffix){
